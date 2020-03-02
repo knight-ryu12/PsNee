@@ -90,6 +90,8 @@
 #error "Select a board!"
 #endif
 
+#define SYMBOL_INJECT_COUNT 2
+
 #if defined(PSNEEDEBUG) && defined(USINGSOFTWARESERIAL)
 #include <SoftwareSerial.h>
 SoftwareSerial mySerial(-1, 3); // RX, TX. (RX -1 = off)
@@ -404,7 +406,7 @@ start:
     // HC-05 waits for a bit of silence (pin low) before it begins decoding.
     delay(delay_between_injections);
     // inject symbols now. 2 x 3 runs seems optimal to cover all boards
-    for (byte loop_counter = 0; loop_counter < 2; loop_counter++)
+    for (byte loop_counter = 0; loop_counter < SYMBOL_INJECT_COUNT; loop_counter++)
     {
       inject_SCEX('e'); // e = SCEE, a = SCEA, i = SCEI
       inject_SCEX('a'); // injects all 3 regions by default
